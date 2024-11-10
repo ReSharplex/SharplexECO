@@ -20,5 +20,16 @@ class Program
         sniffManager.Test();
 
         Console.ReadLine();
+
+        var pos = Console.GetCursorPosition();
+        foreach (var ipData in sniffManager.GetIpData())
+        {
+            Console.WriteLine($"{ipData.Isp}");
+        }
+        
+        foreach (var ipData in sniffManager.GetIpData())
+        {
+            Console.WriteLine($"{ipData.IPAddress} - {ipData.Isp}");
+        }
     }
 }

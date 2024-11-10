@@ -1,21 +1,27 @@
 ﻿using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using Newtonsoft.Json.Linq;
 
 namespace SniffSharp;
 
 public class IpManager
 {
-    private List<IpData> _ips = [];
+    public List<IpData> Ips = [];
     
-    public async Task<IpData> Parse(IPAddress ip)
+    public IpData? Parse(IPAddress ip)
     {
-        var tempIp = _ips.FirstOrDefault(e => ip.Equals(e.IPAddress));
+        var tempIp = Ips.FirstOrDefault(e => ip.Equals(e.IPAddress));
         if (tempIp is not null) return tempIp;
         
         using var client = new HttpClient();
-        var response = await client.GetAsync($"http://ip-api.com/json/{ip}?fields=status,message,country,countryCode,city,zip,lat,lon,timezone,isp,as,mobile,proxy,hosting");
-        string dataJson = await response.Content.ReadAsStringAsync();
+        var response = client
+            .GetAsync(
+                $"http://ip-api.com/json/{ip}?fields=status,message,country,countryCode,city,zip,lat,lon,timezone,isp,as,mobile,proxy,hosting")
+            .Result;
+        string dataJson = response.Content.ReadAsStringAsync().Result;
 
+        if (string.IsNullOrEmpty(dataJson)) return null;
+        
         dynamic data = JObject.Parse(dataJson);
 
         var ipData = new IpData()
@@ -34,7 +40,7 @@ public class IpManager
             Asn = data.@as
         };
         
-        _ips.Add(ipData);
+        Ips.Add(ipData);
         return ipData;
     }
 }

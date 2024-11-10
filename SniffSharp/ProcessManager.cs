@@ -75,7 +75,6 @@ public class ProcessManager
         var output = process.StandardOutput.ReadToEnd();
         process.WaitForExit();
 
-        // Regex to parse netstat output
         var regex = new Regex(@"\s*UDP\s+\d+\.\d+\.\d+\.\d+:(\d+)\s+\*\:\*\s+(\d+)");
         
         foreach (Match match in regex.Matches(output))

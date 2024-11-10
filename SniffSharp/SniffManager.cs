@@ -54,22 +54,22 @@ public class SniffManager
         var rawPacket = e.GetPacket();
         DateTime time = e.Header.Timeval.Date;
         var len = e.Data.Length;
-        Task.Run(async () => await ProcessPacketAsync(rawPacket, time, len));
+        ProcessPacketAsync(rawPacket, time, len);
     }
 
-    private async Task ProcessPacketAsync(RawCapture rawPacket, DateTime time, int len)
+    private void ProcessPacketAsync(RawCapture rawPacket, DateTime time, int len)
     {
         Packet? packet = Packet.ParsePacket(rawPacket.LinkLayerType, rawPacket.Data);
-        await ExtractPacket(packet, time, len);
+        ExtractPacket(packet, time, len);
     }
 
-    private async Task ExtractPacket(Packet packet, DateTime time, int len)
+    private void ExtractPacket(Packet packet, DateTime time, int len)
     {
-        if (!await ExtractTcpPacket(packet, time, len)) return;
-        if (!await ExtractUdpPacket(packet, time, len)) return;
+        if (ExtractTcpPacket(packet, time, len)) return;
+        if (ExtractUdpPacket(packet, time, len)) return;
     }
     
-    private async Task<bool> ExtractTcpPacket(Packet packet, DateTime time, int len)
+    private bool ExtractTcpPacket(Packet packet, DateTime time, int len)
     {
         var tcpPacket = packet.Extract<TcpPacket>();
         if (tcpPacket == null) return false;
@@ -77,14 +77,14 @@ public class SniffManager
         IPPacket? ipPacket = GetIpPacket(tcpPacket);
         if (ipPacket is null) return false;
         
-        var ipData = await GetInformationAboutIp(ipPacket.DestinationAddress);
+        var ipData = GetInformationAboutIp(ipPacket.DestinationAddress);
 
         ShowInformation(ipData, ipPacket, tcpPacket, time, len);
         
         return true;
     }
 
-    private async Task<bool> ExtractUdpPacket(Packet packet, DateTime time, int len)
+    private bool ExtractUdpPacket(Packet packet, DateTime time, int len)
     {
         UdpPacket? udpPacket = packet.Extract<UdpPacket>();
         if (udpPacket is null) return false;
@@ -92,26 +92,31 @@ public class SniffManager
         IPPacket? ipPacket = GetIpPacket(udpPacket);
         if (ipPacket is null) return false;
         
-        var ipData = await GetInformationAboutIp(ipPacket.DestinationAddress);
+        var ipData = GetInformationAboutIp(ipPacket.DestinationAddress);
         
         ShowInformation(ipData, ipPacket, udpPacket, time, len);
         
         return true;
     }
 
-    private async Task<IpData> GetInformationAboutIp(IPAddress ipAddress)
+    private IpData? GetInformationAboutIp(IPAddress ipAddress)
     {
-        return await _ipManager.Parse(ipAddress);
+        return _ipManager.Parse(ipAddress);
     }
 
-    private void ShowInformation(IpData ipData, IPPacket ipPacket, TransportPacket packet, DateTime time, int len)
+    private void ShowInformation(IpData? ipData, IPPacket ipPacket, TransportPacket packet, DateTime time, int len)
     {
-        if (string.IsNullOrEmpty(ipData.Isp)) return;
+        if (string.IsNullOrEmpty(ipData?.Isp)) return;
         Console.WriteLine($"{time.Minute}:{time.Second} - {len} [{ipPacket.SourceAddress}:{packet.SourcePort} -> {ipPacket.DestinationAddress}:{packet.DestinationPort}] - {ipData.Isp}");
     }
 
     private IPPacket? GetIpPacket<TSource>(TSource packet) where TSource : Packet
     {
         return packet.ParentPacket as IPPacket;
+    }
+
+    public List<IpData> GetIpData()
+    {
+        return _ipManager.Ips;
     }
 }
