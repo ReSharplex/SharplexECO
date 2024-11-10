@@ -1,9 +1,24 @@
-﻿namespace SniffSharp;
+﻿using System.Diagnostics;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Text.RegularExpressions;
+using PacketDotNet;
+using PacketDotNet.DhcpV4;
+using SharpPcap;
+using SharpPcap.LibPcap;
+
+namespace SniffSharp;
 
 class Program
 {
-    static void Main(string[] args)
+    public static List<string> ips = [];
+    
+    public static void Main()
     {
-        Console.WriteLine("Hello, World!");
+        SniffManager sniffManager = new SniffManager();
+        sniffManager.Test();
+
+        Console.ReadLine();
     }
 }
