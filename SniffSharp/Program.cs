@@ -12,8 +12,6 @@ namespace SniffSharp;
 
 class Program
 {
-    public static List<string> ips = [];
-    
     public static void Main()
     {
         SniffManager sniffManager = new SniffManager();
@@ -21,7 +19,6 @@ class Program
 
         Console.ReadLine();
 
-        var pos = Console.GetCursorPosition();
         foreach (var ipData in sniffManager.GetIpData())
         {
             Console.WriteLine($"{ipData.Isp}");
