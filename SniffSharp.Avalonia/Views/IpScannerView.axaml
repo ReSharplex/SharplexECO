@@ -1,0 +1,20 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SniffSharp.Avalonia.Views.IpScannerView" Background="#131312">
+    <Grid RowDefinitions="100, *, 100">
+        <Grid Background="#1E1E1E"></Grid>
+        <Grid Grid.Row="1" Background="#1f1e1f" Margin="75 15">
+            
+        </Grid>
+        <Grid Row="2" ColumnDefinitions="55, 350" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Background="#1E1E1E">
+                <materialIcons:MaterialIcon Kind="ContentPaste"></materialIcons:MaterialIcon>
+            </Button>
+            <TextBox Watermark="Search IP" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#1f1e1f" Width="350" Height="50" CornerRadius="20"/>
+        </Grid>
+    </Grid>
+</UserControl>

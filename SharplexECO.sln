@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordInteractor", "Discor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SniffSharp", "SniffSharp\SniffSharp.csproj", "{C8788AF6-1376-40B0-8D53-8888352E091A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SniffSharp.Avalonia", "SniffSharp.Avalonia\SniffSharp.Avalonia.csproj", "{650B5F6C-0F41-492C-BE16-2A8ED67D2F29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{C8788AF6-1376-40B0-8D53-8888352E091A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8788AF6-1376-40B0-8D53-8888352E091A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8788AF6-1376-40B0-8D53-8888352E091A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650B5F6C-0F41-492C-BE16-2A8ED67D2F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650B5F6C-0F41-492C-BE16-2A8ED67D2F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650B5F6C-0F41-492C-BE16-2A8ED67D2F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650B5F6C-0F41-492C-BE16-2A8ED67D2F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
