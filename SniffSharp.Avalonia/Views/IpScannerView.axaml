@@ -3,18 +3,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="700"
              x:Class="SniffSharp.Avalonia.Views.IpScannerView" Background="#131312">
-    <Grid RowDefinitions="100, *, 100">
-        <Grid Background="#1E1E1E"></Grid>
-        <Grid Grid.Row="1" Background="#1f1e1f" Margin="75 15">
-            
-        </Grid>
-        <Grid Row="2" ColumnDefinitions="55, 350" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Background="#1E1E1E">
-                <materialIcons:MaterialIcon Kind="ContentPaste"></materialIcons:MaterialIcon>
+    <Grid RowDefinitions="80, 30, *, 30, 100" ColumnDefinitions="20, 460, 20">
+        <Grid ColumnDefinitions="*, 55, 55" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Text="IP-Scanner" Foreground="#939292" FontSize="32" Opacity="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Background="Transparent">
+                <materialIcons:MaterialIcon Kind="AccessPointNetwork" Height="40" Width="40" Foreground="#939292"/>
             </Button>
-            <TextBox Watermark="Search IP" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#1f1e1f" Width="350" Height="50" CornerRadius="20"/>
+            <Button Grid.Column="2" Background="Transparent">
+                <materialIcons:MaterialIcon Kind="BarcodeScanner" Height="40" Width="40" Foreground="#939292"/>
+            </Button>
+        </Grid>
+        
+        <Grid RowDefinitions="60, 10, *" Grid.Row="2" Grid.Column="1">
+            <TextBlock Grid.Column="0" Text="Data" Foreground="#939292" Opacity="50" HorizontalAlignment="Left" FontSize="32"/>
+            <Grid Grid.Row="2" ColumnDefinitions="155, 155, 155" RowDefinitions="160, 60, 60, 60" VerticalAlignment="Top">
+                <Grid Grid.Column="0" Grid.Row="0" RowDefinitions="*, *" Height="150" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
+                    <TextBlock Text="Continent" FontSize="15" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="1" Text="Europe" FontSize="23" Foreground="Wheat" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                </Grid>
+                <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ColumnDefinitions="100, *" Height="60" Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
+                    <TextBlock Text="ISP" FontSize="18" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="AS8412 T-Mobile Austria GmbH" FontSize="21" Foreground="Wheat" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <Grid Row="4" Grid.Column="1" RowDefinitions="60, 10, 50" ColumnDefinitions="55, 5, 400" VerticalAlignment="Stretch">
+            <TextBlock Grid.Column="0" Text="Input" Grid.ColumnSpan="3" Foreground="#939292" Opacity="50" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="32"/>
+            <Border Grid.Column="0" Grid.Row="1" Background="#1E1E1E" Width="55" Height="50" CornerRadius="10">
+                <Button Background="Transparent">
+                    <materialIcons:MaterialIcon Kind="ContentPaste" Height="40" Width="40" Foreground="#939292"/>
+                </Button>
+            </Border>
+            <TextBox Watermark="Search IP" Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Center" BorderThickness="0" VerticalContentAlignment="Center" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#1f1e1f" Width="400" Height="50" CornerRadius="10"/>
         </Grid>
     </Grid>
 </UserControl>
