@@ -5,6 +5,7 @@
              xmlns:viewModel="clr-namespace:SniffSharp.Avalonia.ViewModels"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="700"
+             x:CompileBindings="False"
              x:Class="SniffSharp.Avalonia.Views.IpScannerView" Background="#131312">
     <Design.DataContext>
         <viewModel:IpScannerViewModel/>
@@ -24,27 +25,27 @@
             <Grid ColumnDefinitions="155, 155, 155" RowDefinitions="165, 65, 65, 65" VerticalAlignment="Top">
                 <Grid Grid.Column="0" Grid.Row="0" RowDefinitions="*, *" Height="150" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
                     <TextBlock Text="Continent" FontSize="15" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                    <TextBlock Grid.Row="1" Text="Europe" FontSize="23" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Continent}" FontSize="23" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="0" RowDefinitions="*, *" Height="150" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
                     <TextBlock Text="Country" FontSize="15" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                    <TextBlock Grid.Row="1" Text="Austria" FontSize="23" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Country}" FontSize="23" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid Grid.Column="2" Grid.Row="0" RowDefinitions="*, *" Height="150" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
                     <TextBlock Text="City" FontSize="15" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                    <TextBlock Grid.Row="1" Text="Ternitz" FontSize="23" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBlock Grid.Row="1" Text="{Binding City}" FontSize="23" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ColumnDefinitions="100, *" Height="60" Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
                     <TextBlock Text="ISP" FontSize="18" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="1" Text="T-Mobile Austria GmbH" FontSize="21" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Isp}" FontSize="21" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" ColumnDefinitions="100, *" Height="60" Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
                     <TextBlock Text="ORG" FontSize="18" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="1" Text="Magenta Telekom" FontSize="21" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Org}" FontSize="21" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" ColumnDefinitions="100, *" Height="60" Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#171717">
                     <TextBlock Text="AS" FontSize="18" Foreground="#939292" Opacity="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="1" Text="AS8412 T-Mobile Austria GmbH" FontSize="21" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding As}" TextWrapping="Wrap" FontSize="21" Foreground="#C96868" Opacity="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -55,9 +56,9 @@
                     <materialIcons:MaterialIcon Kind="ContentPaste" Height="40" Width="40" Foreground="#939292"/>
                 </Button>
             </Border>
-            <TextBox Watermark="Search IP" Grid.Column="2" KeyUp="InputElement_OnKeyUp" PointerReleased="InputElement_OnPointerReleased" Grid.Row="1" HorizontalContentAlignment="Center" BorderThickness="0" VerticalContentAlignment="Center" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#1f1e1f" Width="340" Height="50" CornerRadius="10"/>
+            <TextBox Watermark="Search IP" x:Name="IpTextBox" Grid.Column="2" KeyUp="InputElement_OnKeyUp" PointerReleased="InputElement_OnPointerReleased" Grid.Row="1" HorizontalContentAlignment="Center" BorderThickness="0" VerticalContentAlignment="Center" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#1f1e1f" Width="340" Height="50" CornerRadius="10"/>
             <Border Grid.Column="4" Grid.Row="1" Background="#1E1E1E" Width="55" Height="50" CornerRadius="10">
-                <Button Background="Transparent">
+                <Button Background="Transparent" Command="{Binding ScanIpCommand}" CommandParameter="{Binding Text, ElementName=IpTextBox}">
                     <materialIcons:MaterialIcon Kind="Send" Height="40" Width="40" Foreground="#939292"/>
                 </Button>
             </Border>

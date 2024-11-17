@@ -6,9 +6,9 @@ namespace SniffSharp.Avalonia.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private UserControl _selectedView;
+    private ViewModelBase _selectedView;
 
-    public UserControl SelectedView
+    public ViewModelBase SelectedView
     {
         get => _selectedView;
         set => this.RaiseAndSetIfChanged(ref _selectedView, value);
@@ -16,6 +16,6 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        SelectedView = new IpScannerView();
+        SelectedView = new IpScannerViewModel();
     }
 }
